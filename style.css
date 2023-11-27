@@ -11,6 +11,8 @@
 }
 
 .calculator__container{
+    width: 90%;
+    margin: 0 auto;
     text-align: center;
     background-color: var(--calculator);
 }
@@ -27,16 +29,16 @@
 }
 
 .calculator__keys_numbers{
-    grid-template-columns: repeat(3, 100px);
+    grid-template-columns: repeat(3, 80px);
 }
 
 .calculator__keys_operators{
-    grid-template-columns: 100px;
+    grid-template-columns: 80px;
 }
 
 .key__number, .key__operator{
     text-align: center;
-    height: 80px;
+    height: 60px;
     padding: calc(50% - var(--tamanho__fonte)) 0 0;
     margin: 5px;
     border-radius: 10px;

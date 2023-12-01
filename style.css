@@ -13,6 +13,12 @@
 
 }
 
+body{
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+}
+
 .calculator__container{
     width: 95%;
     margin: 0 auto;

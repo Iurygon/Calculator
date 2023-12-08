@@ -5,8 +5,10 @@
     --calculator__shadow: #bebebe80;
     --number__keys: #00807a;
     --number__keys_shadow: #00807a70;
-    --del_clear__keys: #e2a024;
-    --del_clear__keys_shadow: #e2a02460;
+    --clear__keys: #e2a024;
+    --clear__keys_shadow: #e2a02460;
+    --del__key: #b90f0f;
+    --del__key_shadow: #b90f0f70;
     --operator__keys: #006eff;
     --operator__keys_shadow: #006eff70;
     --display__color: #83d683b4;
@@ -102,11 +104,21 @@ body{
 }
 
 .clear__display{
-    background-color: var(--del_clear__keys);
-    box-shadow: 4px 3px var(--del_clear__keys_shadow);
+    background-color: var(--clear__keys);
+    box-shadow: 4px 3px var(--clear__keys_shadow);
 }
 
 .clear__display:active{
-    background-color: var(--del_clear__keys_shadow);
+    background-color: var(--clear__keys_shadow);
+    box-shadow: none;
+}
+
+.erase__number{
+    background-color: var(--del__key);
+    box-shadow: 4px 3px var(--del__key_shadow);
+}
+
+.erase__number:active{
+    background-color: var(--del__key_shadow);
     box-shadow: none;
 }

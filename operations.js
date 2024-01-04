@@ -13,7 +13,4 @@ const operations = {
     }
 };
 
-module.exports = operations;
-
-
-console.log(operations.division(10, 5))
+export default operations;

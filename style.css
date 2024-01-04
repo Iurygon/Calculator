@@ -1,5 +1,4 @@
 :root{
-
     --background: #5c0f0f;
     --calculator: #bebebe;
     --calculator__shadow: #bebebe80;
@@ -13,13 +12,12 @@
     --operator__keys_shadow: #006eff70;
     --display__color: #83d683b4;
     --white: #ffffff;
-
 }
 
 body{
     width: 100%;
     height: 100%;
-    background: url('math_background.jpg') var(--background);
+    background: url('math_background.jpg');
 }
 
 .calculator__container{
@@ -125,4 +123,12 @@ body{
 .erase__number:active{
     background-color: var(--del__key_shadow);
     box-shadow: none;
+}
+
+@media screen and (min-width: 550px){
+
+    .calculator__container{
+        width: 450px;
+    }
+    
 }

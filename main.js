@@ -1,5 +1,5 @@
 // /*OPERATIONS OBJECT*/
-// import operations from "./operations.js";
+import operations from "./operations.js";
 
 /*  DOCUMENT ELEMENTS
     ELEMENTOS DO DOCUMENTO
@@ -15,28 +15,42 @@ const display = document.querySelector('.display__text');
     NÚMEROS DA OPERAÇÃO
 */
 let numberOne = [];
-let numberTwo = undefined;
+let numberTwo = [];
 
 /*  CHOOSED OPERATOR
     OPERADOR ESCOLHIDO
 */
 let operatorValue = '';
 
+/*  OPERATION RESULT
+    RESULTADO DA OPERAÇÃO
+*/
+let finalResult = '';
+
 
 /*----------------------------------------------------------------------------------------------*/
 
+/*  FUNCTION TO SHOW THE VALUES ON DISPLAY
+    FUNÇÃO PARA MOSTRAR OS RESULTADOS NA TELA
+*/
+
+function showNumbers(num){
+    display.innerHTML = num;
+};
 
 /*  DEFINES THE VALUE OF THE OPERATION NUMBERS
     DEFINE O VALOR DOS NÚMEROS DA OPERAÇÃO
 */
 for(let i = 0; i <= numbers.length - 1; i++){
     numbers[i].addEventListener('click', () => {
-        numberOne.push(numbers[i].innerHTML);
-
-
-        console.log(numberOne.join().replaceAll(',', ''));
-    
-    
+        if(operatorValue === ''){
+            numberOne.push(numbers[i].innerHTML);
+            showNumbers(formatString(numberOne));
+        }
+        else{
+            numberTwo.push(numbers[i].innerHTML);
+            showNumbers(formatString(numberTwo));
+        };
     });
 };
 
@@ -44,13 +58,21 @@ for(let i = 0; i <= numbers.length - 1; i++){
     DEFINE O QUE AS TECLAS CLEAR E ERASE VÃO FAZER
 */
 erase.addEventListener('click', () => {
-    numberOne.pop();
-    console.log(numberOne.join().replaceAll(',', ''));
+    if(operatorValue === ''){
+        numberOne.pop();
+        showNumbers(formatString(numberOne));
+    }
+    else{
+        numberTwo.pop();
+        showNumbers(formatString(numberTwo));
+    };
 });
 
 clear.addEventListener('click', () => {
     numberOne = [];
-    console.log(numberOne.join().replaceAll(',', ''));
+    numberTwo = [];
+    operatorValue = '';
+    showNumbers('0')
 });
 
 /*  DEFINES WHICH OPERATION WILL BE EXECUTED
@@ -70,9 +92,31 @@ for(let i = 0; i <= operators.length - 1; i++){
         else if(operators[i].innerHTML == '+'){
             operatorValue = 'sum';
         };
-        numberTwo = numberOne.join().replaceAll(',', '');
-        numberOne = [];
-        console.log(numberTwo)
-        console.log(numberOne)
     });
 };
+
+/*  CALCULATES AND SHOWS THE RESULT
+    CALCULA E MOSTRA O RESULTADO
+*/
+result.addEventListener('click', () => {
+    if(operatorValue === 'division'){
+        finalResult = operations.division(formatString(numberOne), formatString(numberTwo));
+    }
+    else if(operatorValue === 'multiplication'){
+        finalResult = operations.multiplication(formatString(numberOne), formatString(numberTwo));
+    }
+    else if(operatorValue === 'subtraction'){
+        finalResult = operations.subtraction(formatString(numberOne), formatString(numberTwo));
+    }
+    else if (operatorValue === 'sum'){
+        finalResult = operations.sum(formatString(numberOne), formatString(numberTwo));
+    };
+    showNumbers(finalResult)
+    numberOne = [];
+    numberTwo = [];
+    operatorValue = '';
+});
+
+function formatString(string){
+    return string.join().replaceAll(',', '');
+}

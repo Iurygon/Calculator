@@ -14,3 +14,11 @@ const operations = {
 };
 
 export default operations;
+
+let t1 = '10';
+let t2 = '10';
+
+console.log(operations.sum(t1, t2));
+console.log(operations.subtraction(t1, t2));
+console.log(operations.division(t1, t2));
+console.log(operations.multiplication(t1, t2));

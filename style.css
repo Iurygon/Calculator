@@ -43,6 +43,7 @@ body{
     background-color: var(--display__color);
     margin: 10px auto 30px;
     border-radius: 5px;
+    position: relative;
 }
 
 .display__text{
@@ -50,6 +51,18 @@ body{
     color: var(--white);
     margin-right: 20px;
     font-family: 'Orbitron', sans-serif;
+}
+
+.display__text_storage{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--white);
+    font-family: 'Orbitron', sans-serif;
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 
 .calculator__keys{

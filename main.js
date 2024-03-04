@@ -10,6 +10,7 @@ const clear = document.querySelector('.clear__display');
 const erase = document.querySelector('.erase__number');
 const result = document.querySelector('.key__results');
 const display = document.querySelector('.display__text');
+const storagedVar = document.querySelectorAll('.storaged__variable');
 
 /*  OPERATION NUMBERS
     NÚMEROS DA OPERAÇÃO

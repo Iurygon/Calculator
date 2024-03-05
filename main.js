@@ -31,13 +31,17 @@ let finalResult = '';
 
 /*----------------------------------------------------------------------------------------------*/
 
-/*  FUNCTION TO SHOW THE VALUES ON DISPLAY
-    FUNÇÃO PARA MOSTRAR OS RESULTADOS NA TELA
+/*  FUNCTIONS TO SHOW THE VALUES ON DISPLAY
+    FUNÇÕES PARA MOSTRAR OS RESULTADOS NA TELA
 */
 
 function showNumbers(num){
     display.innerHTML = num;
 };
+
+function formatString(string){
+    return string.join().replaceAll(',', '');
+}
 
 /*  DEFINES THE VALUE OF THE OPERATION NUMBERS
     DEFINE O VALOR DOS NÚMEROS DA OPERAÇÃO
@@ -47,6 +51,9 @@ for(let i = 0; i <= numbers.length - 1; i++){
         if(operatorValue === ''){
             numberOne.push(numbers[i].innerHTML);
             showNumbers(formatString(numberOne));
+            for(let j = 0; j <= storagedVar.length - 1; j++){
+                storagedVar[j].innerHTML = ''
+            };
         }
         else{
             numberTwo.push(numbers[i].innerHTML);
@@ -93,6 +100,11 @@ for(let i = 0; i <= operators.length - 1; i++){
         else if(operators[i].innerHTML == '+'){
             operatorValue = 'sum';
         };
+        /*  SHOWS WHICH NUMBER AND OPERATION WAS SETLED
+            MOSTRA QUAL NÚMERO E OPERAÇÃO FORAM DEFINIDOS
+        */
+        storagedVar[0].innerHTML = formatString(numberOne);
+        storagedVar[1].innerHTML = operators[i].innerHTML;
     });
 };
 
@@ -112,12 +124,13 @@ result.addEventListener('click', () => {
     else if (operatorValue === 'sum'){
         finalResult = operations.sum(formatString(numberOne), formatString(numberTwo));
     };
+    /*  SHOWS WHICH NUMBER AND OPERATION WAS SETLED
+        MOSTRA QUAL NÚMERO E OPERAÇÃO FORAM DEFINIDOS
+    */
+    storagedVar[2].innerHTML = formatString(numberTwo);
+
     showNumbers(finalResult)
     numberOne = [];
     numberTwo = [];
     operatorValue = '';
 });
-
-function formatString(string){
-    return string.join().replaceAll(',', '');
-}

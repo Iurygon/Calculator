@@ -10,7 +10,7 @@ const clear = document.querySelector('.clear__display');
 const erase = document.querySelector('.erase__number');
 const result = document.querySelector('.key__results');
 const display = document.querySelector('.display__text');
-const storagedVar = document.querySelectorAll('.storaged__variable');
+const storedVar = document.querySelectorAll('.stored__variable');
 
 /*  OPERATION NUMBERS
     NÚMEROS DA OPERAÇÃO
@@ -31,8 +31,8 @@ let finalResult = '';
 
 /*----------------------------------------------------------------------------------------------*/
 
-/*  FUNCTIONS TO SHOW THE VALUES ON DISPLAY
-    FUNÇÕES PARA MOSTRAR OS RESULTADOS NA TELA
+/*  DISPLAY FUNCTIONS
+    FUNÇÕES DA TELA
 */
 
 function showNumbers(num){
@@ -41,7 +41,13 @@ function showNumbers(num){
 
 function formatString(string){
     return string.join().replaceAll(',', '');
-}
+};
+
+function clearStoredVar(){
+    for(let i = 0; i <= storedVar.length - 1; i++){
+        storedVar[i].innerHTML = '';
+    };
+};
 
 /*  DEFINES THE VALUE OF THE OPERATION NUMBERS
     DEFINE O VALOR DOS NÚMEROS DA OPERAÇÃO
@@ -51,9 +57,7 @@ for(let i = 0; i <= numbers.length - 1; i++){
         if(operatorValue === ''){
             numberOne.push(numbers[i].innerHTML);
             showNumbers(formatString(numberOne));
-            for(let j = 0; j <= storagedVar.length - 1; j++){
-                storagedVar[j].innerHTML = ''
-            };
+            clearStoredVar();
         }
         else{
             numberTwo.push(numbers[i].innerHTML);
@@ -80,7 +84,8 @@ clear.addEventListener('click', () => {
     numberOne = [];
     numberTwo = [];
     operatorValue = '';
-    showNumbers('0')
+    showNumbers('0');
+    clearStoredVar();
 });
 
 /*  DEFINES WHICH OPERATION WILL BE EXECUTED
@@ -103,8 +108,8 @@ for(let i = 0; i <= operators.length - 1; i++){
         /*  SHOWS WHICH NUMBER AND OPERATION WAS SETLED
             MOSTRA QUAL NÚMERO E OPERAÇÃO FORAM DEFINIDOS
         */
-        storagedVar[0].innerHTML = formatString(numberOne);
-        storagedVar[1].innerHTML = operators[i].innerHTML;
+        storedVar[0].innerHTML = formatString(numberOne);
+        storedVar[1].innerHTML = operators[i].innerHTML;
     });
 };
 
@@ -124,13 +129,31 @@ result.addEventListener('click', () => {
     else if (operatorValue === 'sum'){
         finalResult = operations.sum(formatString(numberOne), formatString(numberTwo));
     };
-    /*  SHOWS WHICH NUMBER AND OPERATION WAS SETLED
-        MOSTRA QUAL NÚMERO E OPERAÇÃO FORAM DEFINIDOS
+    /*  SHOWS WHICH NUMBER WAS SETLED
+        MOSTRA QUAL NÚMERO FOI DEFINIDO
     */
-    storagedVar[2].innerHTML = formatString(numberTwo);
-
+    if(operatorValue === ''){
+        clearStoredVar();
+    }
+    else{
+        storedVar[2].innerHTML = formatString(numberTwo);
+    };
     showNumbers(finalResult)
     numberOne = [];
     numberTwo = [];
     operatorValue = '';
+    finalResult = '0';
 });
+
+/*
+    NÚMEROS: PUXAR PELO PELA KEY, FUNCIONA TANTO PELO NUMPAD QUANTO PELO NÚMEROS ('0' A '9')
+    OPERAÇÕES:
+        SOMA -> KEY '+'
+        SUBTRAÇÃO -> KEY '-'
+        MULTIPLICAÇÃO -> KEY '*'        
+        DIVISÃO -> KEY '/'
+    APAGAR: CODE 'Backspace'
+    CLEAR: CODE 'Space' OU CODE 'KeyC' 
+    RESULT: KEY '=' OU CODE 'Enter'
+
+*/

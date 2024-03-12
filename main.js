@@ -69,24 +69,27 @@ for(let i = 0; i <= numbers.length - 1; i++){
 /*  DEFINES WHAT CLEAR AND ERASE KEYS WILL DO
     DEFINE O QUE AS TECLAS CLEAR E ERASE VÃO FAZER
 */
-erase.addEventListener('click', () => {
+function eraseValue(){
     if(operatorValue === ''){
-        numberOne.pop();
-        showNumbers(formatString(numberOne));
+    numberOne.pop();
+    showNumbers(formatString(numberOne));
     }
     else{
         numberTwo.pop();
         showNumbers(formatString(numberTwo));
     };
-});
+};
 
-clear.addEventListener('click', () => {
+function clearValues(){
     numberOne = [];
     numberTwo = [];
     operatorValue = '';
     showNumbers('0');
     clearStoredVar();
-});
+};
+
+erase.addEventListener('click', eraseValue);
+clear.addEventListener('click', clearValues);
 
 /*  DEFINES WHICH OPERATION WILL BE EXECUTED
     DEFINE QUAL OPERAÇÃO SERÁ EXECUTADA
@@ -116,7 +119,7 @@ for(let i = 0; i <= operators.length - 1; i++){
 /*  CALCULATES AND SHOWS THE RESULT
     CALCULA E MOSTRA O RESULTADO
 */
-result.addEventListener('click', () => {
+function calculateResults(){    
     if(operatorValue === 'division'){
         finalResult = operations.division(formatString(numberOne), formatString(numberTwo));
     }
@@ -130,10 +133,10 @@ result.addEventListener('click', () => {
         finalResult = operations.sum(formatString(numberOne), formatString(numberTwo));
     };
     /*  SHOWS WHICH NUMBER WAS SETLED
-        MOSTRA QUAL NÚMERO FOI DEFINIDO
+    MOSTRA QUAL NÚMERO FOI DEFINIDO
     */
-    if(operatorValue === ''){
-        clearStoredVar();
+   if(operatorValue === ''){
+       clearStoredVar();
     }
     else{
         storedVar[2].innerHTML = formatString(numberTwo);
@@ -143,8 +146,9 @@ result.addEventListener('click', () => {
     numberTwo = [];
     operatorValue = '';
     finalResult = '0';
-});
+};
 
+result.addEventListener('click', calculateResults);
 /*
     NÚMEROS: PUXAR PELO PELA KEY, FUNCIONA TANTO PELO NUMPAD QUANTO PELO NÚMEROS ('0' A '9')
     OPERAÇÕES:

@@ -12,6 +12,15 @@ const result = document.querySelector('.key__results');
 const display = document.querySelector('.display__text');
 const storedVar = document.querySelectorAll('.stored__variable');
 
+/*  KEYBOARD VALUES
+    VALORES DO TECLADO
+*/
+const keyNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const keyOperators = ['+', '-', '/', '*'];
+const keyClear = [' ', 'c', 'C'];
+const keyErase = ['Backspace', 'Delete'];
+const keyResult = ['=', 'Enter'];
+
 /*  OPERATION NUMBERS
     NÚMEROS DA OPERAÇÃO
 */
@@ -27,7 +36,6 @@ let operatorValue = '';
     RESULTADO DA OPERAÇÃO
 */
 let finalResult = '';
-
 
 /*----------------------------------------------------------------------------------------------*/
 
@@ -65,6 +73,7 @@ for(let i = 0; i <= numbers.length - 1; i++){
         };
     });
 };
+
 
 /*  DEFINES WHAT CLEAR AND ERASE KEYS WILL DO
     DEFINE O QUE AS TECLAS CLEAR E ERASE VÃO FAZER
@@ -149,15 +158,45 @@ function calculateResults(){
 };
 
 result.addEventListener('click', calculateResults);
-/*
-    NÚMEROS: PUXAR PELO PELA KEY, FUNCIONA TANTO PELO NUMPAD QUANTO PELO NÚMEROS ('0' A '9')
-    OPERAÇÕES:
-        SOMA -> KEY '+'
-        SUBTRAÇÃO -> KEY '-'
-        MULTIPLICAÇÃO -> KEY '*'        
-        DIVISÃO -> KEY '/'
-    APAGAR: CODE 'Backspace'
-    CLEAR: CODE 'Space' OU CODE 'KeyC' 
-    RESULT: KEY '=' OU CODE 'Enter'
 
+/*  KEYBOARD COMMANDS
+    COMANDOS DO TECLADO
 */
+window.addEventListener('keyup', (event) => {
+    if(keyNumbers.includes(event.key)){
+            if(operatorValue === ''){
+                numberOne.push(event.key);
+                showNumbers(formatString(numberOne));
+                clearStoredVar();
+            }
+            else{
+                numberTwo.push(event.key);
+                showNumbers(formatString(numberTwo));
+            };
+    }
+    else if(keyErase.includes(event.key)){
+        eraseValue();
+    }
+    else if(keyClear.includes(event.key)){
+        clearValues();
+    }
+    else if(keyOperators.includes(event.key)){
+        if(event.key == '/'){
+            operatorValue = 'division';
+        }
+        else if(event.key == '*'){
+            operatorValue = 'multiplication';
+        }
+        else if(event.key == '-'){
+            operatorValue = 'subtraction';
+        }
+        else if(event.key == '+'){
+            operatorValue = 'sum';
+        };
+        storedVar[0].innerHTML = formatString(numberOne);
+        storedVar[1].innerHTML = event.key;
+    }
+    else if(keyResult.includes(event.key)){
+        calculateResults();
+    }
+});

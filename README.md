@@ -5,8 +5,8 @@ A project done with the objective of training my skills in JavaScript, developin
 Projeto feito com intuito principal de treinar minhas habilidades em JavaScript, desenvolvendo uma calculadora que faz contas simples de soma, subtração, divisão e multiplicação. A ideia principal é fazer utilizando objetos JS para realizar as operações e atingir o resultado esperado. É responsivo e funciona tanto clicando com o mouse quanto digitando no teclado.
 
 ## Screenshots
-![Projetc Image](Images/Image_One.PNG)
-![Projetc Image](Images/Image_Two.PNG)
+![Project Image](Images/Image_One.png)
+![Project Image](Images/Image_Two.png)
 
 ## Challenges (Desafios)
 The most challenging part of this project was developing the programming logic for how I could get the numbers without using a console. It took me some time, but I decided to use arrays, where I could include and store the numbers that would be used in the operations.
